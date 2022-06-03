@@ -1,0 +1,23 @@
+plugins {
+    id "org.sonarqube" version "3.3"
+}
+
+file("build.properties").withReader {
+    Properties props = new Properties()
+    props.load(it)
+    project.ext.appVersion = props['VERSION']
+}
+
+version = appVersion
+
+task printVersion {
+    doLast {
+        println project.version
+    }
+}
+
+task printMajorVersion {
+    doLast {
+        println "v" +project.version.split("\\.")[0];
+    }
+}
